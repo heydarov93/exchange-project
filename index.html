@@ -11,31 +11,33 @@
     <main>
       <div class="main__container">
         <h1 class="main__title">Конвертер валют онлайн</h1>
-        <div class="base__currency">
-          <label class="base__label">У меня есть</label>
-          <div class="currency__codes">
-            <div class="code code-active">RUB</div>
-            <div class="code">USD</div>
-            <div class="code">EUR</div>
-            <div class="code">GBP</div>
+        <div class="currency__flex__container">
+          <div class="base__currency">
+            <label class="top__label">У меня есть</label>
+            <div class="currency__codes">
+              <div class="code code__active">RUB</div>
+              <div class="code">USD</div>
+              <div class="code">EUR</div>
+              <div class="code">GBP</div>
+            </div>
+            <div class="input__box">
+              <input type="text" id="baseInput" class="input__field" />
+              <label class="sub__info">1 RUB = 0.0135 USD</label>
+            </div>
           </div>
-          <div class="input__box">
-            <input type="text" class="currency__input" />
-            <label class="sub__info">1 RUB = 0.0135 USD</label>
-          </div>
-        </div>
 
-        <div class="output__currency">
-          <label class="base__label">Хочу приобрести</label>
-          <div class="currency__codes">
-            <div class="code code-active">RUB</div>
-            <div class="code">USD</div>
-            <div class="code">EUR</div>
-            <div class="code">GBP</div>
-          </div>
-          <div class="input__box">
-            <input type="text" class="currency__input" />
-            <label class="sub__info">1 RUB = 0.0135 USD</label>
+          <div class="output__currency">
+            <label class="top__label">Хочу приобрести</label>
+            <div class="currency__codes">
+              <div class="code">RUB</div>
+              <div class="code  code__active">USD</div>
+              <div class="code">EUR</div>
+              <div class="code">GBP</div>
+            </div>
+            <div class="input__box">
+              <input type="text" id="output" class="input__field" />
+              <label class="sub__info">1 RUB = 0.0135 USD</label>
+            </div>
           </div>
         </div>
       </div>
