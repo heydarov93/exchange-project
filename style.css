@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@600&display=swap");
 
 * {
   margin: 0;
@@ -13,6 +14,38 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav__logo {
+  font-family: "Prompt", sans-serif;
+  width: 12rem;
+  /* height: 2.3rem; */
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.logo__text {
+  font-size: 3.2rem;
+  font-weight: 600;
+  color: #833ae0;
+}
+
+.logo__icon {
+  font-size: 2.4rem;
+  color: #fff;
+  background-color: #833ae0;
+  padding: 0 1rem;
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main__container {
