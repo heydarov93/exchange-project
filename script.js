@@ -2,6 +2,7 @@
 const currencyCodesEl = document.querySelectorAll(".currency__codes");
 const inputBase = document.querySelector("#baseInput");
 const inputOutput = document.querySelector("#output");
+const navLinksEl = document.querySelector(".nav__links");
 
 ///////////////////////////////////////////////////////////
 // Default value for inputs
@@ -105,6 +106,24 @@ async function exchange(dir = "base") {
     console.error("Algoritmika bank exchange error: \n", err);
   }
 }
+
+//////////////////////////////////////////////////////////////////////////
+// hover effect for nav links
+navLinksEl.addEventListener("mouseover", (e) => {
+  [...document.querySelectorAll(".link a")].forEach((link) => {
+    if (link !== e.target && e.target !== e.currentTarget) {
+      document.querySelector(".nav__link__active a").style.color = "#959BA4";
+      link.style.opacity = 0.5;
+    }
+  });
+});
+
+navLinksEl.addEventListener("mouseout", (e) => {
+  document.querySelector(".nav__link__active a").style.color = "#000";
+  [...document.querySelectorAll(".link a")].forEach((link) => {
+    link.style.opacity = 1;
+  });
+});
 
 // const ratesObj = exchange(baseCurrencyCode).then((data) => data);
 

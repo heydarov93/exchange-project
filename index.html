@@ -1,65 +1,67 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Bank | Algoritmika</title>
-  </head>
-  <body>
-    <header>
-      <nav class="nav">
-        <div class="nav__logo">
-          <div class="logo__text">bank</div>
-          <div class="logo__icon">a</div>
-        </div>
-        <ul class="nav__links">
-          <li class="link">БАНК</li>
-          <li class="link">БИЗНЕС</li>
-          <li class="link">ИНВЕСТИЦИИ</li>
-          <li class="link">СТРАХОВАНИЕ</li>
-          <li class="link">МОБАЙЛ</li>
-          <li class="link">ПУТЕШЕСТВИЯ</li>
-          <li class="link">РАЗВЛЕЧЕНИЯ</li>
-        </ul>
-        <button class="nav__login__btn">ВОЙТИ</button>
-      </nav>
-    </header>
-    <main>
-      <div class="main__container">
-        <h1 class="main__title">Конвертер валют онлайн</h1>
-        <div class="currency__flex__container">
-          <div id="baseCurrencyWrapper" class="base__currency">
-            <label class="top__label">У меня есть</label>
-            <div class="currency__codes">
-              <div class="code code__active">RUB</div>
-              <div class="code">USD</div>
-              <div class="code">EUR</div>
-              <div class="code">GBP</div>
-            </div>
-            <div class="input__box">
-              <input type="text" id="baseInput" class="input__field" />
-              <label class="sub__info">1 RUB = 0.0135 USD</label>
-            </div>
-          </div>
 
-          <div id="outputCurrencyWrapper" class="output__currency">
-            <label class="top__label">Хочу приобрести</label>
-            <div class="currency__codes">
-              <div class="code">RUB</div>
-              <div class="code code__active">USD</div>
-              <div class="code">EUR</div>
-              <div class="code">GBP</div>
-            </div>
-            <div class="input__box">
-              <input type="text" id="output" class="input__field" />
-              <label class="sub__info">1 RUB = 0.0135 USD</label>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Bank | Algoritmika</title>
+</head>
+
+<body>
+  <header>
+    <nav class="nav">
+      <div class="nav__logo">
+        <img src="header_logo.png" alt="">
+      </div>
+      <ul class="nav__links">
+        <li class="link nav__link__active"><a href="#">БАНК</a></li>
+        <li class="link"><a href="#">БИЗНЕС</a></li>
+        <li class="link"><a href="#">ИНВЕСТИЦИИ</a></li>
+        <li class="link"><a href="#">СТРАХОВАНИЕ</a></li>
+        <li class="link nav__link__hover"><a href="#">МОБАЙЛ</a></li>
+        <li class="link"><a href="#">ПУТЕШЕСТВИЯ</a></li>
+        <li class="link"><a href="#">РАЗВЛЕЧЕНИЯ</a></li>
+      </ul>
+      <button class="nav__login__btn">ВОЙТИ</button>
+    </nav>
+  </header>
+  <main>
+    <div class="main__container">
+      <h1 class="main__title">Конвертер валют онлайн</h1>
+      <div class="currency__flex__container">
+        <div id="baseCurrencyWrapper" class="base__currency">
+          <label class="top__label">У меня есть</label>
+          <div class="currency__codes">
+            <div class="code code__active">RUB</div>
+            <div class="code">USD</div>
+            <div class="code">EUR</div>
+            <div class="code">GBP</div>
+          </div>
+          <div class="input__box">
+            <input type="text" id="baseInput" class="input__field" />
+            <label class="sub__info">1 RUB = 0.0135 USD</label>
+          </div>
+        </div>
+
+        <div id="outputCurrencyWrapper" class="output__currency">
+          <label class="top__label">Хочу приобрести</label>
+          <div class="currency__codes">
+            <div class="code">RUB</div>
+            <div class="code code__active">USD</div>
+            <div class="code">EUR</div>
+            <div class="code">GBP</div>
+          </div>
+          <div class="input__box">
+            <input type="text" id="output" class="input__field" />
+            <label class="sub__info">1 RUB = 0.0135 USD</label>
           </div>
         </div>
       </div>
-    </main>
-    <script src="script.js"></script>
-  </body>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+
 </html>
