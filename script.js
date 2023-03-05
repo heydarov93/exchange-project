@@ -3,7 +3,9 @@ const currencyCodesEl = document.querySelectorAll(".currency__codes");
 const inputBase = document.querySelector("#baseInput");
 const inputOutput = document.querySelector("#output");
 const navLinksEl = document.querySelector(".nav__links");
-
+const navLinks = navLinksEl.querySelectorAll("a");
+const baseSubInfo = document.querySelector(".base__currency .sub__info");
+const outputSubInfo = document.querySelector(".output__currency .sub__info");
 ///////////////////////////////////////////////////////////
 // Default value for inputs
 inputBase.value = 1;
@@ -16,23 +18,24 @@ currencyCodesEl.forEach((curCode) => {
     [...curCode.children].forEach((el) => el.classList.remove("code__active"));
 
     e.target.classList.add("code__active");
+
     exchange();
   });
 });
 
 ///////////////////////////////////////////////////////////
 // fetch and calc data while typing into input field
-[inputBase, inputOutput].forEach((input) => {
-  input.addEventListener("keydown", (e) => {
+[inputBase, inputOutput].forEach((input, i, arr) => {
+  input.addEventListener("keyup", (e) => {
     const regEx = /[0-9.,]|backspace/i;
     const regEx2 = /[.,]/i;
-    // console.log(e);
+
     if (e.key.match(regEx)) {
-      if (e.key.match(regEx2) && e.target.value.match(regEx2)) {
+      if (e.key.match(regEx2) && e.target.value.match(regEx2))
         e.preventDefault();
-      }
+
       if (e.target.closest("#baseCurrencyWrapper")) exchange();
-      else if (e.target.closest("#outputCurrencyWrapper")) exchange("output");
+      else exchange("output");
     } else {
       e.preventDefault();
     }
@@ -42,75 +45,84 @@ currencyCodesEl.forEach((curCode) => {
 async function exchange(dir = "base") {
   try {
     // select active currency code (base & output)
-    const activeBaseCode = document.querySelector(
+    const activeBase = document.querySelector(
       ".base__currency .code__active"
     ).textContent;
-    const activeOutputCode = document.querySelector(
+    const activeSymbol = document.querySelector(
       ".output__currency .code__active"
     ).textContent;
 
-    let base, symbol;
+    if (activeBase === activeSymbol) {
+      // don't send request if both currencies are the  same
+      if (dir === "base") inputOutput.value = inputBase.value;
+      else inputBase.value = inputOutput.value;
 
-    if (dir === "base") {
-      base = activeBaseCode;
-      symbol = activeOutputCode;
-    } else {
-      base = activeOutputCode;
-      symbol = activeBaseCode;
-    }
-
-    if (base === symbol) {
-      inputOutput.value = inputBase.value;
-      document.querySelector(".base__currency .sub__info").innerHTML = `
-      1 ${base} = 1.0000 ${symbol}
+      baseSubInfo.innerHTML = `
+      1 ${activeBase} = 1.0000 ${activeSymbol}
       `;
-      document.querySelector(".output__currency .sub__info").innerHTML = `
-    1 ${symbol} = 1.0000 ${base}
+      outputSubInfo.innerHTML = `
+    1 ${activeSymbol} = 1.0000 ${activeBase}
     `;
     } else {
       // Fetch currency value based on base wrapper
+
       const request = await fetch(
-        `https://api.exchangerate.host/latest?base=${base}&symbols=${symbol}`
+        `https://api.exchangerate.host/latest?base=${activeBase}&symbols=${activeSymbol}`
+      );
+
+      const request2 = await fetch(
+        `https://api.exchangerate.host/latest?base=${activeSymbol}&symbols=${activeBase}`
       );
 
       const response = await request.json();
+      const response2 = await request2.json();
 
-      // Calculate result and display output
+      // correct input value
       inputBase.value = inputBase.value.replace(",", ".");
       inputOutput.value = inputOutput.value.replace(",", ".");
+      inputBase.value = inputBase.value === "." ? "0." : inputBase.value;
+      inputOutput.value = inputOutput.value === "." ? "0." : inputOutput.value;
 
+      // Calculate result and display output
       if (dir === "base") {
-        inputOutput.value = (inputBase.value * response.rates[symbol]).toFixed(
-          4
-        );
+        // if request depends on base side
+        inputOutput.value = (
+          inputBase.value * response.rates[activeSymbol]
+        ).toFixed(4);
+
+        // show sub infos  about rate
+        baseSubInfo.innerHTML = `
+        1 ${activeBase} = 
+        ${response.rates[activeSymbol].toFixed(4)} ${activeSymbol}`;
+
+        outputSubInfo.innerHTML = `
+      1 ${activeSymbol} = 
+      ${response2.rates[activeBase].toFixed(4)} ${activeBase}`;
       } else {
-        inputBase.value = (inputOutput.value * response.rates[symbol]).toFixed(
-          4
-        );
+        // if request depends on output side
+        inputBase.value = (
+          inputOutput.value * response2.rates[activeBase]
+        ).toFixed(4);
 
-        // [base, symbol] = [symbol, base];
+        // show sub infos  about rate
+        baseSubInfo.innerHTML = `
+      1 ${activeBase} = 
+      ${response.rates[activeSymbol].toFixed(4)} ${activeSymbol}`;
+
+        outputSubInfo.innerHTML = `
+        1 ${activeSymbol} = 
+        ${response2.rates[activeBase].toFixed(4)} ${activeBase}`;
       }
-
-      document.querySelector(".base__currency .sub__info").innerHTML = `
-      1 ${activeBaseCode} = ${response.rates[activeOutputCode].toFixed(
-        4
-      )} ${activeOutputCode}
-      `;
-      document.querySelector(".output__currency .sub__info").innerHTML = `
-    1 ${activeOutputCode} = ${(1 / response.rates[activeOutputCode]).toFixed(
-        4
-      )} ${activeBaseCode}
-    `;
     }
   } catch (err) {
-    console.error("Algoritmika bank exchange error: \n", err);
+    alert("Xəta baş verdi");
   }
 }
 
 //////////////////////////////////////////////////////////////////////////
 // hover effect for nav links
 navLinksEl.addEventListener("mouseover", (e) => {
-  [...document.querySelectorAll(".link a")].forEach((link) => {
+  [...navLinks].forEach((link) => {
     if (link !== e.target && e.target !== e.currentTarget) {
       document.querySelector(".nav__link__active a").style.color = "#959BA4";
       link.style.opacity = 0.5;
@@ -118,19 +130,9 @@ navLinksEl.addEventListener("mouseover", (e) => {
   });
 });
 
-navLinksEl.addEventListener("mouseout", (e) => {
+navLinksEl.addEventListener("mouseout", () => {
   document.querySelector(".nav__link__active a").style.color = "#000";
-  [...document.querySelectorAll(".link a")].forEach((link) => {
+  [...navLinks].forEach((link) => {
     link.style.opacity = 1;
   });
 });
-
-// const ratesObj = exchange(baseCurrencyCode).then((data) => data);
-
-// function calcOutputCurrency(baseValue, symbol) {
-//   return ratesObj.then((data) => +baseValue * data[symbol]);
-// }
-
-// calcOutputCurrency(baseCurrencyValue, outputCurrencyCode).then((data) =>
-//   console.log(data)
-// );
