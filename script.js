@@ -25,23 +25,47 @@ currencyCodesEl.forEach((curCode) => {
 
 ///////////////////////////////////////////////////////////
 // fetch and calc data while typing into input field
-[inputBase, inputOutput].forEach((input, i, arr) => {
-  input.addEventListener("keyup", (e) => {
-    const regEx = /[0-9.,]|backspace/i;
-    const regEx2 = /[.,]/i;
+const inputHandler = (e) => {
+  const keyName = e.key;
+  const input = e.target;
+  const regEx = /[0-9.,]|backspace/i;
+  const regEx2 = /[.,]/i;
 
-    if (e.key.match(regEx)) {
-      if (e.key.match(regEx2) && e.target.value.match(regEx2))
-        e.preventDefault();
+  // if entered character is valid (0 - 9 . , backspace)
+  if (keyName.match(regEx)) {
+    // correct input value
+    inputBase.value = inputBase.value.replace(",", ".");
+    inputOutput.value = inputOutput.value.replace(",", ".");
+    inputBase.value = inputBase.value === "." ? "0." : inputBase.value;
+    inputOutput.value = inputOutput.value === "." ? "0." : inputOutput.value;
 
-      if (e.target.closest("#baseCurrencyWrapper")) exchange();
-      else exchange("output");
-    } else {
+    // check if there is already one dot char. then prevent action
+    if (keyName.match(regEx2) && input.value.match(regEx2)) {
       e.preventDefault();
+      return;
     }
-  });
+
+    // on keyup calculate values
+    if (e.type === "keyup") {
+      if (input.closest("#baseCurrencyWrapper")) exchange();
+      else exchange("output");
+    }
+    return;
+  }
+  // if entered char. don't match with valid chars.
+  e.preventDefault();
+};
+
+[inputBase, inputOutput].forEach((input) => {
+  // prevent action if there is an invalid value entered
+  input.addEventListener("keydown", inputHandler);
+
+  // call exchange function (calculate) on keyup event
+  input.addEventListener("keyup", inputHandler);
 });
 
+/////////////////////////////////////////////////////////////
+// function for fetch and calculate currency rates
 async function exchange(dir = "base") {
   try {
     // select active currency code (base & output)
@@ -63,59 +87,53 @@ async function exchange(dir = "base") {
       outputSubInfo.innerHTML = `
     1 ${activeSymbol} = 1.0000 ${activeBase}
     `;
-    } else {
-      // Fetch currency value based on base wrapper
 
-      const request = await fetch(
-        `https://api.exchangerate.host/latest?base=${activeBase}&symbols=${activeSymbol}`
-      );
+      return;
+    }
+    // Fetch currency value based on base wrapper
+    const request = await fetch(
+      `https://api.exchangerate.host/latest?base=${activeBase}&symbols=${activeSymbol}`
+    );
 
-      const request2 = await fetch(
-        `https://api.exchangerate.host/latest?base=${activeSymbol}&symbols=${activeBase}`
-      );
+    const request2 = await fetch(
+      `https://api.exchangerate.host/latest?base=${activeSymbol}&symbols=${activeBase}`
+    );
 
-      const response = await request.json();
-      const response2 = await request2.json();
+    const response = await request.json();
+    const response2 = await request2.json();
 
-      // correct input value
-      inputBase.value = inputBase.value.replace(",", ".");
-      inputOutput.value = inputOutput.value.replace(",", ".");
-      inputBase.value = inputBase.value === "." ? "0." : inputBase.value;
-      inputOutput.value = inputOutput.value === "." ? "0." : inputOutput.value;
+    // Calculate result and display output
+    if (dir === "base") {
+      // if request depends on base side
+      inputOutput.value = (
+        inputBase.value * response.rates[activeSymbol]
+      ).toFixed(4);
 
-      // Calculate result and display output
-      if (dir === "base") {
-        // if request depends on base side
-        inputOutput.value = (
-          inputBase.value * response.rates[activeSymbol]
-        ).toFixed(4);
-
-        // show sub infos  about rate
-        baseSubInfo.innerHTML = `
+      // show sub info  about rate
+      baseSubInfo.innerHTML = `
         1 ${activeBase} = 
         ${response.rates[activeSymbol].toFixed(4)} ${activeSymbol}`;
 
-        outputSubInfo.innerHTML = `
+      outputSubInfo.innerHTML = `
       1 ${activeSymbol} = 
       ${response2.rates[activeBase].toFixed(4)} ${activeBase}`;
-      } else {
-        // if request depends on output side
-        inputBase.value = (
-          inputOutput.value * response2.rates[activeBase]
-        ).toFixed(4);
+    } else {
+      // if request depends on output side
+      inputBase.value = (
+        inputOutput.value * response2.rates[activeBase]
+      ).toFixed(4);
 
-        // show sub infos  about rate
-        baseSubInfo.innerHTML = `
+      // show sub infos  about rate
+      baseSubInfo.innerHTML = `
       1 ${activeBase} = 
       ${response.rates[activeSymbol].toFixed(4)} ${activeSymbol}`;
 
-        outputSubInfo.innerHTML = `
+      outputSubInfo.innerHTML = `
         1 ${activeSymbol} = 
         ${response2.rates[activeBase].toFixed(4)} ${activeBase}`;
-      }
     }
   } catch (err) {
-    alert("Xəta baş verdi");
+    alert("Something went wrong. Please check your network and try again");
   }
 }
 

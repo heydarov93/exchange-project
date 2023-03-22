@@ -16,6 +16,10 @@ body {
   overflow-x: hidden;
 }
 
+/* ********************** */
+/******** Header *********/
+/* ********************** */
+
 .nav {
   display: flex;
   align-items: center;
@@ -43,7 +47,7 @@ body {
 }
 
 .nav__links {
-  color: #959BA4;
+  color: #959ba4;
   font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -63,6 +67,9 @@ body {
   color: #000;
 }
 
+/* ********************** */
+/******** Main *********/
+/* ********************** */
 .main__container {
   max-width: 64.1rem;
   margin: 0 auto;
