@@ -1,0 +1,19 @@
+{
+  "name": "exchange-project",
+  "version": "1.0.0",
+  "description": "Exchange project given as a task by IT-academy course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heydarov93/exchange-project.git"
+  },
+  "author": "heydarov yashar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heydarov93/exchange-project/issues"
+  },
+  "homepage": "https://github.com/heydarov93/exchange-project#readme"
+}
