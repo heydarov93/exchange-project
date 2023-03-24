@@ -13,5 +13,7 @@ When we type in input so on every change of input no matter which one of them th
 2. When client types **_comma_** its automatically **_changes to dot_**
 3. When client types **_dot_** as a first character then it dynamically changes to **"0."**
 4. Each input can only accept one **_period_**
+5. On every click to each button request and calculation happens depend on ***base input field***
+6. On every change of inputs request and calculation happens according to that input
 
 
