@@ -18,6 +18,3 @@ When we type in input so on every change of input no matter which one of them th
 5. On every click to each button request and calculation happens depend on **_base input field_**
 6. On every change of inputs request and calculation happens according to that input
 7. If the currency codes are the same on both sides, **_no request is sent_**
-
-[![Top Langs](https://github.com/heydarov93/exchange-project.git)]
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=heydarov93/exchange-project.git)](https://github.com/anuraghazra/github-readme-stats)
