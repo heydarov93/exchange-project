@@ -23,6 +23,6 @@ When we type in input so on every change of input no matter which one of them th
 - HTML 5
 - CSS 3
 - JavaScript
--- Dom manipulation
--- async JS
--- Fetch Api
+(Dom manipulation,
+ async JS,
+Fetch Api)
