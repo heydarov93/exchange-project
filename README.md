@@ -2,6 +2,8 @@
 
 ### this is my course task project.Main goal in this project to show knowledge of async javascript, fetching data from exchange rate api
 
+***<a href="https://todolist-yashar.netlify.app/">See Exchange project</a>***
+
 ### What problems solves this project (brief overview)
 
 We have static ui which is not so important.It is just for demonstration. But it had to be the same as the figma template I was given.And it is.
