@@ -2,7 +2,7 @@
 
 ### this is my course task project.Main goal in this project to show knowledge of async javascript, fetching data from exchange rate api
 
-***<a href="https://todolist-yashar.netlify.app/">See Exchange project</a>***
+***<a href="https://exchange-yashar.netlify.app/">See Exchange project</a>***
 
 ### What problems solves this project (brief overview)
 
