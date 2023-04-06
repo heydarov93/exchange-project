@@ -1,30 +1,37 @@
-# exchange-project
+# Exchange Project
+This project was created as part of an IT-academy course to showcase my knowledge of async JavaScript and fetching data from an exchange rate API. You can view the project by clicking on the link provided <a href="https://exchange-yashar.netlify.app/">here</a>.
 
-### this is my course task project.Main goal in this project to show knowledge of async javascript, fetching data from exchange rate api
+### Project Overview
+The main goal of this project was to demonstrate my ability to fetch data asynchronously from an API and display it dynamically on a web page. The project consists of two dynamic input fields, each with currency code buttons above them. When a user clicks one of these buttons, a request is sent to the API with the required currency codes (base currency and symbol currency). Every time a user types in either input field, a request is sent to the API, and the output is calculated based on the rates received from the API.
 
-***<a href="https://exchange-yashar.netlify.app/">See Exchange project</a>***
-
-### What problems solves this project (brief overview)
-
-We have static ui which is not so important.It is just for demonstration. But it had to be the same as the figma template I was given.And it is.
-Main parts of this exchange project are two dynamic inputs.And above each input field are currency code buttons.When client click one of this buttons
-it sends request to <a href="https://api.exchangerate.host/latest?base=USD&symbols=RUB">**Api**</a> with required currency codes - base currency and symbol currency.
-When we type in input so on every change of input no matter which one of them they also send request to <a href="https://api.exchangerate.host/latest?base=USD&symbols=RUB">**Api**</a>.Finally it takes value of inputs and calculate output depending on rates which we recieved from **Api**.
+The user interface was designed to be similar to the Figma template provided to me. It is static and only for demonstration purposes.
 
 ### Features
+The Exchange Project includes the following features:
 
-1. Inputs only accept **_numbers, period, comma and backspace_**
-2. When client types **_comma_** its automatically **_changes to dot_**
-3. When client types **_dot_** as a first character then it dynamically changes to **"0."**
-4. Each input can only accept one **_period_**
-5. On every click to each button request and calculation happens depend on **_base input field_**
-6. On every change of inputs request and calculation happens according to that input
-7. If the currency codes are the same on both sides, **_no request is sent_**
+- Input validation to only accept numbers, periods, commas, and backspace keys.
+- Automatic conversion of commas to dots for decimal places.
+- Automatic insertion of "0." when the user types a period as the first character.
+- Limitation of one period per input field.
+- Dynamic conversion calculations based on the base input field, every time a user clicks on a currency code button.
+- Dynamic conversion calculations based on the input fields every time the user types in either of them.
+- Prevention of API requests when the currency codes on both sides are the same.
 
-### Used technologies and features
-- HTML 5
-- CSS 3
+### Technologies and Features
+The Exchange Project was developed using the following technologies and features:
+
+- HTML5
+- CSS3
 - JavaScript
-(Dom manipulation,
- async JS,
-Fetch Api)
+- DOM manipulation
+- Asynchronous JavaScript
+- Fetch API
+
+Overall, the Exchange Project successfully demonstrates my skills in using modern web development technologies and features to create a functional and user-friendly project. Thank you for taking the time to review this project!
+
+
+
+
+
+
+
